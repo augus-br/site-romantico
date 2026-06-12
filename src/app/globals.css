@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --background: #fff7f3;
+  --foreground: #221614;
+  --surface: rgba(255, 255, 255, 0.78);
+  --surface-strong: rgba(255, 251, 249, 0.92);
+  --border: rgba(171, 107, 91, 0.2);
+  --shadow: 0 30px 80px rgba(117, 65, 48, 0.16);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background:
+    radial-gradient(circle at top, rgba(255, 214, 204, 0.95), rgba(255, 245, 241, 0) 42%),
+    radial-gradient(circle at 12% 22%, rgba(255, 230, 222, 0.9), rgba(255, 230, 222, 0) 30%),
+    linear-gradient(180deg, #fffaf8 0%, #fff2ed 55%, #fff8f5 100%);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--foreground);
+  background: transparent;
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: rgba(208, 109, 88, 0.25);
+  color: #3d1c16;
+}
+
+.scene-bg {
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.9), rgba(255, 246, 241, 0.7) 32%, rgba(255, 246, 241, 0) 68%),
+    linear-gradient(180deg, rgba(255, 250, 248, 0.92) 0%, rgba(255, 243, 238, 0.88) 100%);
+}
+
+.font-display {
+  font-family: var(--font-serif);
+}
+
+.floaty {
+  animation: drift 9s ease-in-out infinite;
+}
+
+.glow-pulse {
+  animation: glow 8s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(204, 104, 84, 0.05));
+  }
+
+  50% {
+    filter: drop-shadow(0 14px 24px rgba(204, 104, 84, 0.16));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
