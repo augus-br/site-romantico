@@ -1,0 +1,40 @@
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "07:25"
+      timezone: America/Sao_Paulo
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 5
+    groups:
+      npm-patch-updates:
+        applies-to: version-updates
+        patterns: ["*"]
+        update-types: [patch]
+      npm-security-updates:
+        applies-to: security-updates
+        patterns: ["*"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "07:35"
+      timezone: America/Sao_Paulo
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 5
+    groups:
+      actions-patch-updates:
+        applies-to: version-updates
+        patterns: ["*"]
+        update-types: [patch]
+      actions-security-updates:
+        applies-to: security-updates
+        patterns: ["*"]
