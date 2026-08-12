@@ -127,22 +127,21 @@ export default function Home() {
     minutes: 0,
     seconds: 0,
   });
-  const [mounted, setMounted] = useState(false);
   const [opened, setOpened] = useState(false);
   const [giftOpened, setGiftOpened] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-
     const updateElapsed = () => {
       setElapsed(computeElapsedParts(relationshipStart, new Date()));
     };
 
-    updateElapsed();
-
+    const timeoutId = window.setTimeout(updateElapsed, 0);
     const intervalId = window.setInterval(updateElapsed, 1000);
 
-    return () => window.clearInterval(intervalId);
+    return () => {
+      window.clearTimeout(timeoutId);
+      window.clearInterval(intervalId);
+    };
   }, []);
 
   return (
@@ -223,7 +222,7 @@ export default function Home() {
                   {item.label}
                 </p>
                 <p className="mt-1 text-lg font-semibold text-[#2c1714]">
-                  {mounted ? String(elapsed[item.key]).padStart(2, "0") : "00"}
+                  {String(elapsed[item.key]).padStart(2, "0")}
                 </p>
               </div>
             ))}
