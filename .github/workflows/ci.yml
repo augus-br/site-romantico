@@ -1,9 +1,9 @@
 name: Build site
 
 on:
-  pull_request:
-    branches: [main, master]
   workflow_dispatch:
+  schedule:
+    - cron: 50 13 * * 6
 
 permissions: {}
 
@@ -14,7 +14,8 @@ concurrency:
 jobs:
   validate:
     name: Static export
-    runs-on: ubuntu-24.04
+    runs-on: ${{ fromJSON(vars.ACTIONS_RUNNER_POLICY || 
+      '{"linux":["ubuntu-24.04"],"arm64":["ubuntu-24.04-arm"],"x64":["ubuntu-24.04"],"hosted":true}').linux }}
     timeout-minutes: 20
     permissions:
       contents: read

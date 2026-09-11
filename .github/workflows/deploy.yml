@@ -1,11 +1,9 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches:
-      - main
-      - master
   workflow_dispatch:
+  schedule:
+    - cron: 7 16 * * 6
 
 permissions: {}
 
@@ -15,7 +13,8 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ${{ fromJSON(vars.ACTIONS_RUNNER_POLICY || 
+      '{"linux":["ubuntu-24.04"],"arm64":["ubuntu-24.04-arm"],"x64":["ubuntu-24.04"],"hosted":true}').linux }}
     timeout-minutes: 20
     permissions:
       contents: read
@@ -50,7 +49,8 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ubuntu-24.04
+    runs-on: ${{ fromJSON(vars.ACTIONS_RUNNER_POLICY || 
+      '{"linux":["ubuntu-24.04"],"arm64":["ubuntu-24.04-arm"],"x64":["ubuntu-24.04"],"hosted":true}').linux }}
     timeout-minutes: 10
     permissions:
       pages: write
