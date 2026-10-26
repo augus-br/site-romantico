@@ -90,7 +90,7 @@ jobs:
       if: needs.prepare.outputs.node == 'true'
       with:
         node-version: '24'
-    - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6
+    - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad
       if: needs.prepare.outputs.android == 'true'
       with:
         distribution: temurin
